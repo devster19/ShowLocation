@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Show Location</title>
+</head>
+<body>
+    <h1>Show Current Location</h1>
+    <p id="js-id">Your ID: Unknow</p>
+    <p id="js-lat">Your Latitude: Unknow</p>
+    <p id="js-long">Your Longitude: Unknow</p>
+    <script>
+        window.onload = getInitValue;
+        function getInitValue(){
+            let hasQuery = window.location.search.slice(1);
+            if(hasQuery){
+                console.log("action");
+                
+                let query =  window.location.search.slice(1)
+                      .split('&')
+                      .reduce(function _reduce (a,b) {
+                        b = b.split('=');
+                        a[b[0]] = decodeURIComponent(b[1]);
+                        return a;
+                      }, {});
+                const {lat, long, id} = query;
+                document.getElementById("js-id").innerHTML = "Your ID: "+id;
+                document.getElementById("js-lat").innerHTML = "Latitude: "+lat;
+                document.getElementById("js-long").innerHTML = "Longitude: "+long;
+            }
+        }
+    </script>
+</body>
+</html>
